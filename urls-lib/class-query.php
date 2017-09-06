@@ -55,7 +55,7 @@
     public function add_user($username, $password, $emailaddr) {
       $query = '';
       $opt = ["cost" => 8];
-      $password = password_hash($password, PASSWORD_BCRYPT, $opt);
+      $password = password_hash($password, PASSWORD_DEFAULT, $opt);
 
       $query .= "INSERT INTO " . dbprefix . "users(username, password, email_address, create_date)";
       $query .= "VALUES ('$username', '$password', '$emailaddr', now());";
@@ -76,16 +76,15 @@
     }
 
     public function reloadpass($username, $password) {
-      $opt = ["cost" => 8];
-      $password = password_hash($password, PASSWORD_BCRYPT, $opt);
-      
       $query = '';
+      $opt = ["cost" => 8];
+      $passwd = password_hash($password, PASSWORD_DEFAULT, $opt);
 
-      $query .= "UPDATE " . dbprefix . "users SET password = '$password' WHERE username = '$username';";
+      $query .= "UPDATE " . dbprefix . "users SET password = '$passwd' WHERE username = '$username';";
 
-      $result = $this->real_query($query);
+      $this->real_query($query);
 
-      return $result;
+      return $passwd;
     }
 
     public function login_user($username) {

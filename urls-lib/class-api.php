@@ -21,6 +21,8 @@
         $result = array(
           'shorturl' => $resultArray['shorturl']
         );
+      }elseif($format === 'url') {
+        $result = $resultArray['shorturl'];
       }else{
         $result = $resultArray;
       }
@@ -35,7 +37,7 @@
       return $result;
     }
     public function return_txt($resultArray) {
-      $shorturl = $resultArray['shorturl'];
+      $shorturl = $resultArray;
       $result = stripslashes($shorturl);
       header('Content-Type: text/txt; charset=utf-8');
       echo($result);

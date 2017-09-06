@@ -6,7 +6,7 @@
       echo $urlscheme;
     ?></code></pre>
   </section>
-  
+
   <section>
     <h1>on php</h1>
     <pre><code>get-shorturl.php
@@ -54,8 +54,7 @@
       <li>Blank NG.</li>
       <li>Disable when API Not Fill.</li>
       <li>Blank is Full. Patterns is "long_and_short"/'longurl and shorturl', "short_only"/'only shorturl', "url"/'$type = `txt`'.</li>
-      <li>Blank is Return JSON. Patterns is "txt"/'return shorturl', "json"/'return json style. this default', "xml"/'return xml style'./li>
+      <li>Blank is Return JSON. Patterns is "txt"/'return shorturl', "json"/'return json style. this default', "xml"/'return xml style'.</li>
     </ol>
   </section>
 </article>
-  

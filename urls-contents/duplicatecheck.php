@@ -63,7 +63,7 @@
     $strcheck = empty($longurl) ? $strcheck : mb_strtolower($longurl);
 
     if($strcheck !== null) {
-      $result = $db->check_duplicate_longurl($strcheck);
+      $result = $db->check_duplicate_longurl($strcheck, $uid);
 
       if($result['num_rows'] > 0) {
         define('DUPLICATE_LONG', true);

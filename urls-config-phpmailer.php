@@ -32,7 +32,7 @@
   
   // SMTP Server Password
   // [ '%password%' ]
-  define('SMTP_PASSWORD', '%password%');
+  define('SMTP_PASSWORD', null);
   
   // SMTP Server Port
   // [ '%password%' ]

@@ -14,9 +14,9 @@
 
     return 0;
   }elseif($URL !== null) {
-    $http->urls_refresh('3', $result);
+    $http->urls_refresh('1', $result);
     include(dirname(__file__) . '/inc/header.php');
-    echo '<p>You\'ll be redirected in about 3 secs. If not, click <a href="' . $result . '">here</a>.' . "</p>\n";
+    echo '<p>You\'ll be redirected in about 1 secs. If not, click <a href="' . $result . '">here</a>.' . "</p>\n";
     echo '<p>' . $URL . "</p>\n";
 
     return 0;
@@ -52,7 +52,7 @@
   $linkpath = mb_strtolower($PATH);
 
   if(preg_match('%\A(/api|/api/)\z%', $linkpath)) {
-    include(dirname(__dir__) . '/urls-api/api.php');
+    include(ABSPATH . '/urls-api/api.php');
     return 0;
   }
 
@@ -99,7 +99,7 @@
 
   endif;
 
-  if(TIME_PUSH) {
+  if(defined('TIME_PUSH') && TIME_PUSH) {
     $end = microtime(true);
 
     echo '<p>ViewTime: ' . sprintf('%0.5f', $end - $start) . "sec</p>\n";

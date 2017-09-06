@@ -1,23 +1,24 @@
 <?php
   // Database Address
   // [ '%ip address%' / '%domain%' ]
-  define('dbhost',        'localhost');
+  // PHP >= 7.0.0 not work localhost. use 127.0.0.1.
+  define('dbhost',        '127.0.0.1');
 
   // Database username
   // [ '%username%' ]
-  define('dbuser',        '%username%');
+  define('dbuser',        null);
 
   // Database password
   // [ '%password%' ]
-  define('dbpasswd',      '%password%');
+  define('dbpasswd',      null);
 
   // Database name
   // [ '%database name%' ]
-  define('dbname',        '%database name%');
+  define('dbname',        null);
 
   // Database table prefix
   // [ '%table prefix%' ]
-  define('dbprefix',      '%table prefix%');
+  define('dbprefix',      'urls_');
 
   // Database charset
   // [ '%charset%' ]
@@ -26,22 +27,22 @@
   // Admin user name
   // [ '%username%' ]
   define('adminuser',     'admin');
-  
+
   // Admin user password
   // [ '%password%' ]
-  define('adminpasswd',   'admin');
+  define('adminpasswd',   'alpine');
 
   // Admin user mail
   // [ '%e-mail address%' ]
-  define('adminemail',    '%e-mail address%');
+  define('adminemail',    'admin@mail.example.com');
 
   // Register mail
   // [ '%e-mail address%' ]
-  define('registemail',   '%e-mail address%');
+  define('registemail',   'admin@mail.example.com');
 
   // Infomation mail
   // [ '%e-mail address%' ]
-  define('infoemail',     '%e-mail address%');
+  define('infoemail',     'info@mail.example.com');
 
   // Server scheme
   // [ 'http' / 'https' / null(responsive) ]
@@ -53,5 +54,5 @@
 
   // Anonymous adduser
   // [ true / false ]
-  //define('adduser',       true);
+  define('adduser',       true);
   

@@ -14,11 +14,8 @@
     fputs($cron, $cronline);
     pclose($cron);
     
-    function cronline($command, $minute = '*', $hour = '*', $day = '*', $month = '*', $week = '*') {
-      return(sprintf("%s  %s  %s  %s  %s  %s\n",  $minute, $hour, $day, $month, $week, $command));
-    }
     return 0;
   }else{
-    require(ABSPATH . '/urls-cron.php');
+    require_once(ABSPATH . '/urls-cron.php');
   }
   

@@ -14,10 +14,12 @@
     public function urls_refresh($reftime = '1', $url = null) {
       $url = empty($url) ? $this->get_url() : $url;
       $ua = $_SERVER['HTTP_USER_AGENT'];
-      if(strpos($ua,'iPhone') || strpos($ua,'iPod') || strpos($ua,'iPad')) {
+      
+      // Not Working Location Header in iOS and OS X, when HTTPS(SSL).
+      if(strpos($ua,'X11') || strpos($ua,'iPhone') || strpos($ua,'iPod') || strpos($ua,'iPad')) {
         $browser = 'ios';
       }
-      if($browser === 'ios'){
+      if($browser === 'ios' && scheme === 'https'){
         header('refresh:' . $reftime . ';url=' . $url);
       }else{
         header('Location: ' . $url);

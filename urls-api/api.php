@@ -32,11 +32,7 @@
     
     $api = new urls_api();
     
-    if($format === 'url') {
-      $type = 'txt';
-    }else{
-      $contents = $api->formatting($format, $contents);
-    }
+    $contents = $api->formatting($format, $contents);
     
     if($type === 'json' || $type === 'xml' || $type === 'txt') {
       $method = 'return_' . $type;

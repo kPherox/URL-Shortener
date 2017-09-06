@@ -15,7 +15,7 @@
 
   if(defined('USE_PHPMAILER') && USE_PHPMAILER) {
     require_once(ABSPATH . '/urls-config-phpmailer.php');
-    require_once(ABSPATH . '/phpmailer/PHPMailerAutoload.php');
+    require_once(ABSPATH . '/PHPMailer/PHPMailerAutoload.php');
   }
 
   if(defined('API') && API) {
