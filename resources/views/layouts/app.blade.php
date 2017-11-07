@@ -49,9 +49,9 @@
                     <div class="collapse navbar-collapse" id="app-navbar-collapse">
                         <!-- Left Side Of Navbar -->
                         <ul class="nav navbar-nav">
-                            <li><a href="/about">About</a></li>
-                            <li><a href="/blog">Blog</a></li>
-                            <li><a href="/news">News</a></li>
+                            <li><a href="{{ url('/about') }}">About</a></li>
+                            <li><a href="{{ url('/blog') }}">Blog</a></li>
+                            <li><a href="{{ url('/news') }}">News</a></li>
                             <li><a href="{{ config('APP_GITHUB_URL', 'https://github.com/kPherox/URL-Shortener-for-PHP') }}">GitHub</a></li>
                         </ul>
 
