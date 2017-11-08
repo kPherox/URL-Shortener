@@ -15,18 +15,29 @@
                     @endif
 
                     You are logged in!
+                </div>
+            </div>
 
-                    <ul>
+            <div class="panel panel-default">
+                <div class="panel-heading">Shortened URLs</div>
+
+                <div class="panel-body">
+                    <div class="list-group list-group-striped">
                         @foreach ( $shortUrls as $shortUrl )
-                            <li>
-                                <div>{{ $shortUrl->long_url }}</div>
-                                <div><a href="{{ env('APP_URL', 'http://localhost') . '/' . $shortUrl->short_url }}">{{ env('APP_URL', 'http://localhost/') . '/' . $shortUrl->short_url }}</a></div>
-                                <div>{{ $shortUrl->url_name }}</div>
-                                <div>{{ $shortUrl->created_at }}</div>
-                                <div>{{ $shortUrl->updated_at }}</div>
-                            </li>
+                            <dl class="list-group-item dl-horizontal">
+                                <dt>URL Title</dt>
+                                    <dd>{{ is_null($shortUrl->url_name) ? 'null' : $shortUrl->url_name }}</dd>
+                                <dt>Long URL</dt>
+                                    <dd>{{ $shortUrl->long_url }}</dd>
+                                <dt>Short URL</dt>
+                                    <dd><a href="{{ url( $shortUrl->short_url ) }}">{{ url( $shortUrl->short_url ) }}</a></dd>
+                                <dt>Create Date</dt>
+                                    <dd>{{ $shortUrl->created_at }}</dd>
+                                <dt>Last Update Date</dt>
+                                    <dd>{{ $shortUrl->updated_at }}</dd>
+                            </dl>
                         @endforeach
-                    </ul>
+                    </div>
 
                     {{ $shortUrls->links() }}
                 </div>
