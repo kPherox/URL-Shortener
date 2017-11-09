@@ -15,7 +15,7 @@ Route::view('/', 'welcome');
 
 Auth::routes();
 
-Route::get('/home', 'HomeController@index')->name('home');
+Route::get('/home', 'HomeController@index')->name('my-page');
 
 Route::post('/shortener', 'ShortUrlController@create')->name('shortener');
 
