@@ -3,17 +3,16 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
+use App\ShortUrl;
 
 class RedirectController extends Controller
 {
     // Redirect method
     function redirect($shortUrl) {
-        $url = DB::table('short_urls')->where('short_url', $shortUrl)->first();
-        if ($url) {
-            return redirect($url->long_url);
-        } else {
-            return abort('404');
-        }
+        $url = ShortUrl::where('short_url', $shortUrl)->first();
+
+        abort_if(is_null($url) , '404', 'Sorry, the page you are looking for could not be found.');
+
+        return redirect($url->long_url);
     }
 }
