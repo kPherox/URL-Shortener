@@ -3,11 +3,11 @@
 @section('content')
 <div class="container">
     <div class="row">
-        <div class="col-md-8 col-md-offset-2">
-            <div class="panel panel-default">
-                <div class="panel-heading">Dashboard</div>
+        <div class="col-lg-10 offset-lg-1">
+            <div class="card">
+                <div class="card-header">Dashboard</div>
 
-                <div class="panel-body">
+                <div class="card-body">
                     @if (session('status'))
                         <div class="alert alert-success">
                             {{ session('status') }}
@@ -18,29 +18,29 @@
                 </div>
             </div>
 
-            <div class="panel panel-default">
-                <div class="panel-heading">Shortened URLs</div>
+            <div class="card">
+                <div class="card-header">Shortened URLs</div>
 
-                <div class="panel-body">
-                    <div class="list-group list-group-striped">
-                        @foreach ( $shortUrls as $shortUrl )
-                            <dl class="list-group-item dl-horizontal">
-                                <dt>URL Title</dt>
-                                    <dd>{{ is_null($shortUrl->url_name) ? 'null' : $shortUrl->url_name }}</dd>
-                                <dt>Long URL</dt>
-                                    <dd>{{ $shortUrl->long_url }}</dd>
-                                <dt>Short URL</dt>
-                                    <dd><a href="{{ url( $shortUrl->short_url ) }}">{{ url( $shortUrl->short_url ) }}</a></dd>
-                                <dt>Create Date</dt>
-                                    <dd>{{ $shortUrl->created_at }}</dd>
-                                <dt>Last Update Date</dt>
-                                    <dd>{{ $shortUrl->updated_at }}</dd>
+                <ul class="list-group list-group-striped">
+                    @foreach ( $shortUrls as $shortUrl )
+                        <li class="list-group-item" style="border: none">
+                            <dl class="row mb-0">
+                                <dt class="col-lg-3 text-lg-right">URL Title</dt>
+                                    <dd class="col-lg-9">{{ is_null($shortUrl->url_name) ? 'null' : $shortUrl->url_name }}</dd>
+                                <dt class="col-lg-3 text-lg-right">Long URL</dt>
+                                    <dd class="col-lg-9">{{ $shortUrl->long_url }}</dd>
+                                <dt class="col-lg-3 text-lg-right">Short URL</dt>
+                                    <dd class="col-lg-9"><a href="{{ url( $shortUrl->short_url ) }}">{{ url( $shortUrl->short_url ) }}</a></dd>
+                                <dt class="col-lg-3 text-lg-right">Create Date</dt>
+                                    <dd class="col-lg-9">{{ $shortUrl->created_at }}</dd>
+                                <dt class="col-lg-3 text-lg-right">Last Update Date</dt>
+                                    <dd class="col-lg-9">{{ $shortUrl->updated_at }}</dd>
                             </dl>
-                        @endforeach
-                    </div>
+                        </li>
+                    @endforeach
+                </ul>
 
-                    {{ $shortUrls->links() }}
-                </div>
+                {{ $shortUrls->links() }}
             </div>
         </div>
     </div>

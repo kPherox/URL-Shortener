@@ -2,26 +2,21 @@
 
 @section('content')
 <div class="container">
-    <div class="title m-b-md">
-        <p>{{ config('app.name', 'Laravel') }}</p>
-    </div>
-
-    <div class="links">
-    </div>
+    <h1 class="display-2 text-center mb-3">{{ config('app.name', 'Laravel') }}</h1>
 
     <div class="row">
-        <div class="col-md-8 col-md-offset-2">
-            <div class="panel panel-default">
-                <div class="panel-heading">URL Shortener</div>
+        <div class="col-lg-8 offset-lg-2">
+            <div class="card">
+                <div class="card-header">URL Shortener</div>
 
-                <div class="panel-body">
-                    <form class="form-horizontal" method="POST" action="{{ route('shortener') }}">
+                <div class="card-body">
+                    <form method="POST" action="{{ route('shortener') }}">
                         {{ csrf_field() }}
 
-                        <div class="form-group{{ $errors->has('url') ? ' has-error' : '' }}">
-                            <label for="url" class="col-md-4 control-label">URL</label>
+                        <div class="form-group{{ $errors->has('url') ? ' has-error' : '' }} row">
+                            <label for="url" class="col-lg-4 col-form-label text-lg-right">URL</label>
 
-                            <div class="col-md-6">
+                            <div class="col-lg-6">
                                 <input id="url" type="url" class="form-control" name="url" value="{{ old('url') }}" required autofocus>
 
                                 @if ($errors->has('url'))
@@ -32,10 +27,10 @@
                             </div>
                         </div>
 
-                        <div class="form-group">
-                            <label for="shortUrl" class="col-md-4 control-label">Custom String</label>
+                        <div class="form-group row">
+                            <label for="shortUrl" class="col-lg-4 col-form-label text-lg-right">Custom String</label>
                             
-                            <div class="col-md-6">
+                            <div class="col-lg-6">
                                 <input id="shortUrl" type="text" class="form-control" name="shortUrl" value=""
                                 @guest
                                     placeholder="Need login to use this feature" readonly
@@ -50,10 +45,10 @@
                             </div>
                         </div>
 
-                        <div class="form-group">
-                            <label for="urlName" class="col-md-4 control-label">URL Name</label>
-                            
-                            <div class="col-md-6">
+                        <div class="form-group row">
+                            <label for="urlName" class="col-lg-4 col-form-label text-lg-right">URL Title</label>
+
+                            <div class="col-lg-6">
                                 <input id="urlName" type="text" class="form-control" name="urlName" value=""
                                 @guest
                                     placeholder="Need login to use this feature" readonly
@@ -68,28 +63,14 @@
                             </div>
                         </div>
 
-                        <div class="form-group">
-                            <div class="col-md-8 col-md-offset-4">
+                        <div class="form-group row">
+                            <div class="col-lg-8 offset-lg-4">
                                 <button type="submit" class="btn btn-primary">
                                     URL Shorting
                                 </button>
                             </div>
                         </div>
                     </form>
-
-                    <script type="text/javascript">
-                        var csrfToken = $('[name="csrf_token"]').attr('content');
-
-                        setInterval(refreshToken, 3600000); // 1 hour 
-
-                        function refreshToken(){
-                            $.get('refresh-csrf').done(function(data){
-                                csrfToken = data; // the new token
-                            });
-                        }
-
-                        setInterval(refreshToken, 3600000); // 1 hour 
-                    </script>
                 </div>
             </div>
         </div>
