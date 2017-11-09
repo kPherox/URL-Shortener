@@ -6,6 +6,15 @@
 
     <div class="row">
         <div class="col-lg-8 offset-lg-2">
+            @if (session('result'))
+                <div class="card bg-success text-white">
+                    <div class="card-header">Success URL Shorten</div>
+                    <div class="card-body">
+                        {{ url(session('result')) }}
+                    </div>
+                </div>
+            @endif
+
             <div class="card">
                 <div class="card-header">URL Shortener</div>
 

@@ -1,5 +1,5 @@
 @if ($paginator->hasPages())
-    <ul class="pagination justify-content-center mt-3">
+    <ul class="pagination justify-content-center mb-0">
         {{-- Previous Page Link --}}
         @if ($paginator->onFirstPage())
             <li class="page-item disabled"><span class="page-link">&laquo;&laquo;</span></li>

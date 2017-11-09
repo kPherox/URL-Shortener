@@ -40,7 +40,7 @@
                     @endforeach
                 </ul>
 
-                {{ $shortUrls->links() }}
+                <div class="card-footer">{{ $shortUrls->links() }}</div>
             </div>
         </div>
     </div>

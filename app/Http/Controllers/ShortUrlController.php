@@ -2,10 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use Auth;
 use App\ShortUrl;
-use Illuminate\Support\Facades\Validator;
-use Illuminate\Http\Request;
-use Illuminate\Foundation\Validation\ValidatesRequest;
 use App\Http\Requests\ShortUrlRequest;
 
 class ShortUrlController extends Controller
@@ -38,8 +36,7 @@ class ShortUrlController extends Controller
      */
     public function create(ShortUrlRequest $request)
     {
-        $user = \Auth::user();
-        $shortUrl = empty($request->shortUrl) ? str_random(6) : $request->shortUrl;
+        $shortUrl = is_null($request->shortUrl) ? str_random(6) : $request->shortUrl;
         $longUrl = $request->url;
         $urlName = $request->urlName;
 
@@ -47,9 +44,10 @@ class ShortUrlController extends Controller
             'short_url' => $shortUrl,
             'long_url' => $longUrl,
             'url_name' => $urlName,
-            'registed' => empty($user) ? false : true,
-            'user_id' => empty($user) ? null : $user->id,
+            'registed' => Auth::check(),
+            'user_id' => Auth::id(),
         ]);
-        return redirect($this->redirectTo);
+
+        return redirect($this->redirectTo)->with('result',$shortUrl);
     }
 }
