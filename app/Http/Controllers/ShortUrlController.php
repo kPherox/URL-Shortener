@@ -36,10 +36,20 @@ class ShortUrlController extends Controller
      */
     public function create(ShortUrlRequest $request)
     {
-        $shortUrl = is_null($request->shortUrl) ? str_random(6) : $request->shortUrl;
         $longUrl = $request->url;
-        $urlName = $request->urlName;
 
+        if (Auth::check()) {
+            $shortUrls = ShortUrl::where('long_url', $longUrl)->where('user_id', Auth::id())->first();
+            if (!is_null($shortUrls)) {
+                return redirect($this->redirectTo)
+                    ->with('status', 'already')
+                    ->with('result', 'Already Shorting URL')
+                    ->with('shortUrl', $shortUrls->short_url);
+            }
+        }
+
+        $shortUrl = is_null($request->shortUrl) ? str_random(6) : $request->shortUrl;
+        $urlName = $request->urlName;
         $result = ShortUrl::create([
             'short_url' => $shortUrl,
             'long_url' => $longUrl,
@@ -48,6 +58,9 @@ class ShortUrlController extends Controller
             'user_id' => Auth::id(),
         ]);
 
-        return redirect($this->redirectTo)->with('result',$shortUrl);
+        return redirect($this->redirectTo)
+            ->with('status', 'success')
+            ->with('result', 'Success URL Shorten')
+            ->with('shortUrl', $shortUrl);
     }
 }

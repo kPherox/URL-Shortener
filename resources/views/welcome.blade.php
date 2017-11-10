@@ -7,10 +7,17 @@
     <div class="row">
         <div class="col-lg-8 offset-lg-2">
             @if (session('result'))
-                <div class="card bg-success text-white">
-                    <div class="card-header">Success URL Shorten</div>
+                <div class="card text-white
+                    @if (session('status') == 'already')
+                        bg-info
+                    @else
+                        bg-{{ session('status') }}
+                    @endif
+                ">
+
+                    <div class="card-header">{{ session('result') }}</div>
                     <div class="card-body">
-                        {{ url(session('result')) }}
+                        {{ url(session('shortUrl')) }}
                     </div>
                 </div>
             @endif
