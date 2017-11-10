@@ -5,7 +5,7 @@
     <div class="row">
         <div class="col-lg-8 offset-lg-2">
             <div class="card">
-                <div class="card-heading">Login</div>
+                <div class="card-header">Login</div>
 
                 <div class="card-body">
                     <form class="form-horizontal" method="POST" action="{{ route('login') }}">
