@@ -1,35 +1,16 @@
 # URL Shortener for PHP
+[![MIT License](http://img.shields.io/badge/license-MIT-blue.svg?style=flat)](License.txt)
+URL Shortener with PHP Language.
+This applicetion use Laravel Framework.
 
-## How to Use
+## Installation procedure
+1. Clone this repository.
+2. Run `composer install`.
+3. Copy `.env.example` to `.env`.
+4. Change database name, username, password on `.env`.
+5. Change `APP_URL` and `SESSION_DOMAIN` on `'env`.
+6. Setting root to `/path/to/URL-Shortener-for-PHP/public`.
 
-### Install Packages
-
-#### Ubuntu
-\# `apt-get install php5-fpm php5-mysqlnd php-pear php5-dev`
-\# `pacl install runkit`
-
-### Web Server Config
-
-#### NGINX
-```Example.conf
-server{
-  listen    80;
-  #listen    443 ssl; #http2(or spdy);
-  root      example.com;
-  index     index.php;
-  charset   utf-8;
-  try_files $uri $uri/ =404 @urlshortener;
-  location  ~ \.php$ {
-    try_files $uri @urlshortener;
-    fastcgi_param  SCRIPT_FILENAME $docment_root$script_file_name;
-
-    ## More Options
-  }
-  location  = @urlshortener {
-    fastcgi_param  SCRIPT_FILENAME $docment_root/<urlshortener dir/>index.php;
-
-    ## More Options
-  }
-}
-```
+## License
+`URL Shortener for PHP` is released under the MIT License. See [License](License.txt) for details.
 
