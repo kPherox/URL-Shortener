@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Auth;
 use App\ShortUrl;
 use App\Http\Requests\ShortUrlRequest;
+use Hashids\Hashids;
 
 class ShortUrlController extends Controller
 {
@@ -39,16 +40,25 @@ class ShortUrlController extends Controller
         $longUrl = $request->url;
 
         if (Auth::check()) {
-            $shortUrls = ShortUrl::where('long_url', $longUrl)->where('user_id', Auth::id())->first();
-            if (!is_null($shortUrls)) {
+            $longUrl = ShortUrl::ofLongUrlAndUserId($longUrl, Auth::id());
+            if ($longUrl->exists()) {
                 return redirect($this->redirectTo)
                     ->with('status', 'already')
                     ->with('result', 'Already Shorting URL')
-                    ->with('shortUrl', $shortUrls->short_url);
+                    ->with('shortUrl', $longUrl->first()->short_url);
             }
         }
 
-        $shortUrl = is_null($request->shortUrl) ? str_random(6) : $request->shortUrl;
+        if (is_null($request->shortUrl)) { 
+            do {
+                $randomStr = str_random(6);
+                $shortUrlExists = ShortUrl::ofShortUrl($randomStr)->exists();
+            } while ($shortUrlExists);
+            $shortUrl = $randomStr;
+        } else {
+            $shortUrl = $request->shortUrl;
+        }
+
         $urlName = $request->urlName;
         $result = ShortUrl::create([
             'short_url' => $shortUrl,

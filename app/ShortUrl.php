@@ -15,4 +15,14 @@ class ShortUrl extends Model
 
     protected $guarded = [];
 
+    public function scopeOfLongUrlAndUserId($query, $longUrl, $userId)
+    {
+        return $query->where('long_url', $longUrl)
+            ->where('user_id', $userId);
+    }
+
+    public function scopeOfShortUrl($query, $shortUrl)
+    {
+        return $query->where('short_url', $shortUrl);
+    }
 }
