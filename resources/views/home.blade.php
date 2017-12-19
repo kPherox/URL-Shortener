@@ -23,7 +23,7 @@
 
                 <ul class="list-group list-group-striped">
                     @foreach ( $shortUrls as $shortUrl )
-                        <li class="list-group-item" style="border: none">
+                        <li class="list-group-item border-0">
                             <dl class="row mb-0">
                                 <dt class="col-lg-3 text-lg-right">URL Title</dt>
                                     <dd class="col-lg-9">{{ is_null($shortUrl->url_name) ? 'null' : $shortUrl->url_name }}</dd>
