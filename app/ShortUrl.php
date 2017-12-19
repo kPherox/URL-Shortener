@@ -17,12 +17,33 @@ class ShortUrl extends Model
 
     public function scopeOfLongUrlAndUserId($query, $longUrl, $userId)
     {
-        return $query->where('long_url', $longUrl)
-            ->where('user_id', $userId);
+        return $query->ofUserId($userId)->ofLongUrl($longUrl);
     }
 
     public function scopeOfShortUrl($query, $shortUrl)
     {
         return $query->where('short_url', $shortUrl);
+    }
+
+    public function scopeOfLongUrl($query, $longUrl)
+    {
+        return $query->where('long_url', $longUrl);
+    }
+
+    public function scopeOfUserId($query, $userId)
+    {
+        return $query->where('user_id', $userId);
+    }
+
+    public function longUrlExists($longUrl, $userId)
+    {
+        $shortUrls = self::ofLongUrlAndUserId($longUrl, $userId);
+        return $shortUrls->exists();
+    }
+
+    public function getShortUrl($longUrl, $userId)
+    {
+        $shortUrls = self::ofLongUrlAndUserId($longUrl, $userId)->first();
+        return $shortUrls->short_url;
     }
 }

@@ -2,10 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use Auth;
 use App\ShortUrl;
 use App\Http\Requests\ShortUrlRequest;
-use Hashids\Hashids;
 
 class ShortUrlController extends Controller
 {
@@ -28,7 +26,6 @@ class ShortUrlController extends Controller
         $this->middleware('web');
     }
 
-
     /**
      * Create a new short url instance after a valid registration.
      *
@@ -39,17 +36,19 @@ class ShortUrlController extends Controller
     {
         $longUrl = $request->url;
 
-        if (Auth::check()) {
-            $longUrl = ShortUrl::ofLongUrlAndUserId($longUrl, Auth::id());
-            if ($longUrl->exists()) {
+        $shortUrls = new ShortUrl;
+        if (auth()->check()) {
+            $hasLongUrl = $shortUrls->longUrlExists($longUrl, auth()->id());
+            if ($hasLongUrl) {
+                $shortUrl = $shortUrls->getShortUrl($longUrl, auth()->id());
                 return redirect($this->redirectTo)
                     ->with('status', 'already')
                     ->with('result', 'Already Shorting URL')
-                    ->with('shortUrl', $longUrl->first()->short_url);
+                    ->with('shortUrl', $shortUrl);
             }
         }
 
-        if (is_null($request->shortUrl)) { 
+        if (is_null($request->shortUrl) || auth()->guest()) { 
             do {
                 $randomStr = str_random(6);
                 $shortUrlExists = ShortUrl::ofShortUrl($randomStr)->exists();
@@ -59,13 +58,13 @@ class ShortUrlController extends Controller
             $shortUrl = $request->shortUrl;
         }
 
-        $urlName = $request->urlName;
+        $urlName = is_null($request->urlName) || auth()->guest() ? null : $request->urlName;
         $result = ShortUrl::create([
             'short_url' => $shortUrl,
             'long_url' => $longUrl,
             'url_name' => $urlName,
-            'registed' => Auth::check(),
-            'user_id' => Auth::id(),
+            'registed' => auth()->check(),
+            'user_id' => auth()->id(),
         ]);
 
         return redirect($this->redirectTo)
