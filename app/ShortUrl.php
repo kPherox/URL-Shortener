@@ -11,7 +11,7 @@ class ShortUrl extends Model
 
     public $timestamps = true;
 
-    protected $fillable = ['short_url', 'long_url', 'url_name', 'registed', 'user_id'];
+    protected $fillable = ['short_url', 'long_url', 'url_name', 'registered', 'user_id'];
 
     protected $guarded = [];
 

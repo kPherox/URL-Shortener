@@ -63,7 +63,7 @@ class ShortUrlController extends Controller
             'short_url' => $shortUrl,
             'long_url' => $longUrl,
             'url_name' => $urlName,
-            'registed' => auth()->check(),
+            'registered' => auth()->check(),
             'user_id' => auth()->id(),
         ]);
 

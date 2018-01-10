@@ -18,7 +18,7 @@ class CreateShortUrlsTable extends Migration
             $table->string('short_url')->unique();
             $table->string('long_url');
             $table->string('url_name')->nullable();
-            $table->boolean('registed');
+            $table->boolean('registered');
             $table->bigInteger('user_id')->unsigned()->nullable();
             $table->timestampsTz();
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
