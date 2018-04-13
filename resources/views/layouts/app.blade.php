@@ -55,11 +55,12 @@
                                         {{ csrf_field() }}
                                     </form>
                                     <script>
-                                        function logout() {
-                                            event.preventDefault();
+                                    document.addEventListener('DOMContentLoaded', function() {
+                                        document.getElementById('logout-button').addEventListener('click', function(e) {
+                                            e.preventDefault();
                                             document.getElementById('logout-form').submit();
-                                        }
-                                        document.getElementById('logout-button').addEventListener('click', logout);
+                                        });
+                                    });
                                     </script>
                                 </ul>
                             </li>
