@@ -7,7 +7,7 @@ use App\Http\Requests\ShorteningRequest;
 
 class ShorteningController extends Controller
 {
-    // URL Shorteninn controller
+    // URL Shortening controller
 
     /**
      * Where to redirect users after registration.
@@ -35,30 +35,34 @@ class ShorteningController extends Controller
     public function create(ShorteningRequest $request)
     {
         $longUrl = $request->url;
+        $shortUrl = auth()->check() ? $request->shorturl : null;
+        $urlName = auth()->check() ? $request->urlname : null;
 
-        $shortUrls = new ShortUrl;
-        if (auth()->check()) {
-            $hasLongUrl = $shortUrls->longUrlExists($longUrl, auth()->id());
-            if ($hasLongUrl) {
-                $shortUrl = $shortUrls->getShortUrl($longUrl, auth()->id());
-                return redirect($this->redirectTo)
-                    ->with('status', 'already')
-                    ->with('result', 'Already Shorting URL')
-                    ->with('shortUrl', $shortUrl);
-            }
+        if (auth()->check() && ShortUrl::longUrlExists($longUrl, auth()->id())) {
+            $shortUrl = ShortUrl::getShortUrl($longUrl, auth()->id());
+            return redirect($this->redirectTo)
+                ->with('status', 'already')
+                ->with('result', 'Already Shorting URL')
+                ->with('shortUrl', $shortUrl);
         }
 
-        if (is_null($request->shortUrl) || auth()->guest()) { 
+        if ($this->isSelfHost($longUrl)) {
+            return redirect($this->redirectTo)
+                ->with('status', 'warning')
+                ->with('result', 'Cannot Shorting '.config('app.url'))
+                ->with('shortUrl', $longUrl);
+        }
+
+        if ($shortUrl && auth()->check()) {
+            $shortUrl = $shortUrl;
+        } else {
             do {
                 $randomStr = str_random(6);
                 $shortUrlExists = ShortUrl::ofShortUrl($randomStr)->exists();
             } while ($shortUrlExists);
             $shortUrl = $randomStr;
-        } else {
-            $shortUrl = $request->shortUrl;
         }
 
-        $urlName = is_null($request->urlName) || auth()->guest() ? null : $request->urlName;
         $result = ShortUrl::create([
             'short_url' => $shortUrl,
             'long_url' => $longUrl,
@@ -71,5 +75,10 @@ class ShorteningController extends Controller
             ->with('status', 'success')
             ->with('result', 'Success URL Shorten')
             ->with('shortUrl', $shortUrl);
+    }
+
+    private function isSelfHost($link)
+    {
+        return parse_url($link, PHP_URL_HOST) === parse_url(config('app.url'), PHP_URL_HOST);
     }
 }
