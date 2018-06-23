@@ -3,9 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\ShortUrl;
-use App\Http\Requests\ShortUrlRequest;
+use App\Http\Requests\ShorteningRequest;
 
-class ShortUrlController extends Controller
+class ShorteningController extends Controller
 {
     // URL Shorteninn controller
 
@@ -30,9 +30,9 @@ class ShortUrlController extends Controller
      * Create a new short url instance after a valid registration.
      *
      * @param  array  $data
-     * @return \App\Http\Request\ShortUrlRequest
+     * @return \App\Http\Request\ShorteningRequest
      */
-    public function create(ShortUrlRequest $request)
+    public function create(ShorteningRequest $request)
     {
         $longUrl = $request->url;
 
