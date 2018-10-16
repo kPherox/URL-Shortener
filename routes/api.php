@@ -3,16 +3,6 @@
 use Illuminate\Http\Request;
 use App\ShortUrl;
 
-function isSelfHost($link)
-{
-    $link = parse_url($link);
-    $linkHost = $link['host'];
-    $self = parse_url(config('app.url'));
-    $selfHost = $self['host'];
-
-    return $linkHost === $selfHost;
-}
-
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -32,7 +22,7 @@ Route::get('/shortening', function (Request $request) {
     $userId = (int)$request->query('id');
     $longUrl = $request->query('longurl');
 
-    if (isSelfHost($longUrl)) {
+    if (parse_url($longUrl, PHP_URL_HOST) === parse_url(config('app.url'), PHP_URL_HOST)) {
         return $longUrl;
     }
 
