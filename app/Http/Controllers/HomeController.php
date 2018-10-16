@@ -3,10 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\ShortUrl;
-use Auth;
-//use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
-//use Illuminate\Pagination\LengthAwarePaginator;
 
 class HomeController extends Controller
 {
@@ -27,7 +24,7 @@ class HomeController extends Controller
      */
     public function index()
     {
-        $user = Auth::user();
+        $user = auth()->user();
         $shortUrls = ShortUrl::where('user_id', $user->id)->paginate(15);
 
         return view('home')->with('shortUrls', $shortUrls);
