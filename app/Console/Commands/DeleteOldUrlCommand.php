@@ -2,10 +2,9 @@
 
 namespace App\Console\Commands;
 
-use Illuminate\Console\Command;
-
-use Carbon\Carbon;
 use App\ShortUrl;
+use Carbon\Carbon;
+use Illuminate\Console\Command;
 
 class DeleteOldUrlCommand extends Command
 {

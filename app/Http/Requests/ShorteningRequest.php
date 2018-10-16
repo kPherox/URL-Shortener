@@ -25,9 +25,9 @@ class ShorteningRequest extends FormRequest
     {
         return [
             //
-            'url' => 'required|string|url|max:191',
+            'url'      => 'required|string|url|max:191',
             'shortUrl' => 'nullable|string|min:6|max:191|unique:short_urls,short_url',
-            'urlName' => 'nullable|string|max:191',
+            'urlName'  => 'nullable|string|max:191',
         ];
     }
 }

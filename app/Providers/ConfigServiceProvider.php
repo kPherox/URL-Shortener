@@ -26,11 +26,11 @@ class ConfigServiceProvider extends ServiceProvider
         //
         config([
             'top_nav.menu' => [
-                'about' => url('/about'),
-                'blog' => url('/blog'),
-                'news' => url('/news'),
+                'about'  => url('/about'),
+                'blog'   => url('/blog'),
+                'news'   => url('/news'),
                 'github' => env('APP_GITHUB_URL', 'https://github.com/kPherox/URL-Shortener'),
-            ]
+            ],
         ]);
     }
 }
