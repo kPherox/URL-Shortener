@@ -1,5 +1,6 @@
 # URL Shortener for PHP
 [![MIT License](http://img.shields.io/badge/license-MIT-blue.svg?style=flat)](License.txt)
+
 URL Shortener with PHP Language.
 This applicetion use Laravel Framework.
 
@@ -9,8 +10,9 @@ This applicetion use Laravel Framework.
 3. Copy `.env.example` to `.env`.
 4. Change database name, username, password on `.env`.
 5. Change `APP_URL` and `SESSION_DOMAIN` on `'env`.
-6. Setting root to `/path/to/URL-Shortener-for-PHP/public`.
+6. Run `php artisan migration`.
+7. Setting root to `/path/to/URL-Shortener-for-PHP/public`.
 
 ## License
-`URL Shortener for PHP` is released under the MIT License. See [License](License.txt) for details.
+This applicetion is released under the MIT License. See [License](License.txt) for details.
 
