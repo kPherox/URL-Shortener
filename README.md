@@ -11,7 +11,7 @@ This applicetion use Laravel Framework.
 4. Change database name, username, password on `.env`.
 5. Change `APP_URL` and `SESSION_DOMAIN` on `'env`.
 6. Run `php artisan migration`.
-7. Setting root to `/path/to/URL-Shortener-for-PHP/public`.
+7. Setting root to `/path/to/URL-Shortener/public`.
 
 ## License
 This applicetion is released under the MIT License. See [License](License.txt) for details.
