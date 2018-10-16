@@ -38,12 +38,14 @@ class ShortUrl extends Model
     public function longUrlExists($longUrl, $userId)
     {
         $shortUrls = self::ofLongUrlAndUserId($longUrl, $userId);
+
         return $shortUrls->exists();
     }
 
     public function getShortUrl($longUrl, $userId)
     {
         $shortUrls = self::ofLongUrlAndUserId($longUrl, $userId)->first();
+
         return $shortUrls->short_url;
     }
 }

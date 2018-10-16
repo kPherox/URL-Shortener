@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use App\ShortUrl;
 use App\Http\Requests\ShorteningRequest;
+use App\ShortUrl;
 
 class ShorteningController extends Controller
 {
@@ -29,7 +29,8 @@ class ShorteningController extends Controller
     /**
      * Create a new short url instance after a valid registration.
      *
-     * @param  array  $data
+     * @param array $data
+     *
      * @return \App\Http\Request\ShorteningRequest
      */
     public function create(ShorteningRequest $request)
@@ -40,6 +41,7 @@ class ShorteningController extends Controller
 
         if (auth()->check() && ShortUrl::longUrlExists($longUrl, auth()->id())) {
             $shortUrl = ShortUrl::getShortUrl($longUrl, auth()->id());
+
             return redirect($this->redirectTo)
                 ->with('status', 'already')
                 ->with('result', 'Already Shorting URL')
@@ -64,11 +66,11 @@ class ShorteningController extends Controller
         }
 
         $result = ShortUrl::create([
-            'short_url' => $shortUrl,
-            'long_url' => $longUrl,
-            'url_name' => $urlName,
+            'short_url'  => $shortUrl,
+            'long_url'   => $longUrl,
+            'url_name'   => $urlName,
             'registered' => auth()->check(),
-            'user_id' => auth()->id(),
+            'user_id'    => auth()->id(),
         ]);
 
         return redirect($this->redirectTo)
