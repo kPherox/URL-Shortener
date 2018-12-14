@@ -6,7 +6,7 @@ use App\ShortUrl;
 use Carbon\Carbon;
 use Illuminate\Console\Command;
 
-class DeleteOldUrlCommand extends Command
+class DeleteOldUrl extends Command
 {
     /**
      * The name and signature of the console command.
