@@ -33,7 +33,7 @@
                             <label for="url" class="col-lg-4 col-form-label text-lg-right">URL</label>
 
                             <div class="col-lg-6">
-                                <input id="url" type="url" class="form-control" name="url" value="{{ old('url') }}" required autofocus>
+                                <input id="url" type="url" class="form-control" name="url" value="{{ old('url') }}" placeholder="https://www.example.com/" required autofocus>
 
                                 @if ($errors->has('url'))
                                     <span class="help-block">

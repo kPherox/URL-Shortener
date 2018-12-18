@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class ShortUrlRequest extends FormRequest
+class ShorteningRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -25,9 +25,9 @@ class ShortUrlRequest extends FormRequest
     {
         return [
             //
-            'url' => 'required|string|url|max:191',
+            'url'      => 'required|string|url|max:191',
             'shortUrl' => 'nullable|string|min:6|max:191|unique:short_urls,short_url',
-            'urlName' => 'nullable|string|max:191',
+            'urlName'  => 'nullable|string|max:191',
         ];
     }
 }

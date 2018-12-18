@@ -17,6 +17,6 @@ Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('my-page');
 
-Route::post('/shortener', 'ShortUrlController@create')->name('shortener');
+Route::post('/shortener', 'ShorteningController@create')->name('shortener');
 
 Route::get('/{short_url}', 'RedirectController@redirect');

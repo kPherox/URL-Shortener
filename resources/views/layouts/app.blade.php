@@ -15,6 +15,7 @@
 
         <!-- Styles -->
         <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+        <link href="{{ asset('vendor/TopNav/top_nav.css') }}" rel="stylesheet">
     </head>
     <body>
         <div id="app">
@@ -26,46 +27,43 @@
                     </a>
 
                     <!-- Collapsed Hamburger -->
-                    <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#app-navbar-collapse" aria-controls="#app-navbar-collapse" aria-label="Toggle Navigation">
+                    <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#app-navbar" aria-controls="#app-navbar" aria-label="Toggle Navigation">
                         <span class="navbar-toggler-icon"></span>
                     </button>
 
-                    <div class="collapse navbar-collapse" id="app-navbar-collapse">
+                    <div class="collapse navbar-collapse" id="app-navbar">
                         <!-- Left Side Of Navbar -->
-                        <ul class="navbar-nav mr-auto">
-                            <li class="nav-item"><a class="nav-link" href="{{ url('/about') }}">About</a></li>
-                            <li class="nav-item"><a class="nav-link" href="{{ url('/blog') }}">Blog</a></li>
-                            <li class="nav-item"><a class="nav-link" href="{{ url('/news') }}">News</a></li>
-                            <li class="nav-item"><a class="nav-link" href="{{ env('APP_GITHUB_URL', 'https://github.com/kPherox/URL-Shortener-for-PHP') }}">GitHub</a></li>
-                        </ul>
+                        @laraveltopnav
 
                         <!-- Right Side Of Navbar -->
-                        <ul class="navbar-nav navbar-right">
+                        <ul class="navbar-nav ml-auto">
                             <!-- Authentication Links -->
                             @guest
-                                <li class="nav-item"><a class="nav-link" href="{{ route('login') }}">Login</a></li>
-                                <li class="nav-item"><a class="nav-link" href="{{ route('register') }}">Register</a></li>
+                            <li class="nav-item"><a class="nav-link" href="{{ route('login') }}">Login</a></li>
+                            <li class="nav-item"><a class="nav-link" href="{{ route('register') }}">Register</a></li>
                             @else
-                                <li class="nav-item dropdown">
-                                    <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" id="navbarDropdownMenuLink"  aria-expanded="false">
-                                        {{ Auth::user()->name }}
-                                    </a>
+                            <li class="nav-item dropdown">
+                                <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" id="navbarDropdownMenuLink"  aria-expanded="false">
+                                    {{ auth()->user()->name }}
+                                </a>
 
-                                    <ul class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownMenuLink">
-                                        <a class="dropdown-item" href="{{ route('my-page') }}">My Page</a>
-                                        <div>
-                                            <a class="dropdown-item" href="{{ route('logout') }}"
-                                                onclick="event.preventDefault();
-                                                     document.getElementById('logout-form').submit();">
-                                                Logout
-                                            </a>
+                                <ul class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownMenuLink">
+                                    <li class="dropdown-item"><a class="nav-link" href="{{ route('my-page') }}">My Page</a></li>
+                                    <li class="dropdown-item"><a id="logout-button" class="nav-link" href="{{ route('logout') }}">Logout</a></li>
 
-                                            <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
-                                                {{ csrf_field() }}
-                                            </form>
-                                        </div>
-                                    </ul>
-                                </li>
+                                    <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                                        {{ csrf_field() }}
+                                    </form>
+                                    <script>
+                                    document.addEventListener('DOMContentLoaded', function() {
+                                        document.getElementById('logout-button').addEventListener('click', function(e) {
+                                            e.preventDefault();
+                                            document.getElementById('logout-form').submit();
+                                        });
+                                    });
+                                    </script>
+                                </ul>
+                            </li>
                             @endguest
                         </ul>
                     </div>
